@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.mystcraftages.items.LinkingBookItem;
 
 import java.util.function.Supplier;
 
@@ -26,11 +27,11 @@ public class MystcraftAges {
 
     // Items
     public static final RegistrySupplier<Item> LINKING_BOOK = ITEMS.register("linking_book", () ->
-            new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB)));
+            new LinkingBookItem(new LinkingBookItem.Properties().tab(MystcraftAges.MYSTCRAFT_TAB).stacksTo(1)));
     public static final RegistrySupplier<Item> DESCRIPTIVE_BOOK = ITEMS.register("descriptive_book", () ->
-            new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB)));
+            new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB).stacksTo(1)));
     public static final RegistrySupplier<Item> INK_VIAL = ITEMS.register("ink_vial", () ->
-            new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB)));
+            new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB).stacksTo(16)));
     
     public static void init() {
         ITEMS.register();
