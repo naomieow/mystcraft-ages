@@ -1,27 +1,27 @@
 {
   "schemaVersion": 1,
-  "id": "examplemod",
+  "id": "mystcraftages",
   "version": "${version}",
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Mystcraft: Ages",
+  "description": "Mystcraft: Ages is a modern rewrite and reimagining of the original \"Mystcraft\" mod. ",
   "authors": [
-    "Me!"
+    "naomieow"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://github.com/naomieow/mystcraftages",
+    "sources": "https://github.com/naomieow/mystcraftages"
   },
   "license": "Insert License Here",
-  "icon": "assets/examplemod/icon.png",
+  "icon": "assets/mystcraftages/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.examplemod.fabric.ExampleModFabric"
+      "net.mystcraftages.fabric.MystcraftAgesFabric"
     ]
   },
   "mixins": [
-    "examplemod.mixins.json",
-    "examplemod-common.mixins.json"
+    "mystcraftages.mixins.json",
+    "mystcraftages-common.mixins.json"
   ],
   "depends": {
     "fabric": "*",
