@@ -1,3 +1,5 @@
 {
-  "item.mystcraftages.example_item": "Example Item"
+  "item.mystcraftages.linking_book": "Linking Book",
+  "item.mystcraftages.descriptive_book": "Descriptive Book",
+  "itemGroup.mystcraftages.mystcraft_tab": "Mystcraft: Ages"
 }
