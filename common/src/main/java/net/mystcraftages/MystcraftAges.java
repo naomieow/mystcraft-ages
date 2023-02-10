@@ -15,13 +15,16 @@ import java.util.function.Supplier;
 
 public class MystcraftAges {
     public static final String MOD_ID = "mystcraftages";
-    // We can use this if we don't want to use DeferredRegister
+
+    // Registries
     public static final Supplier<Registries> REGISTRIES = Suppliers.memoize(() -> Registries.get(MOD_ID));
-    // Registering a new creative tab
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(MOD_ID, Registry.ITEM_REGISTRY);
+    
+    // Creative Tabs
     public static final CreativeModeTab MYSTCRAFT_TAB = CreativeTabRegistry.create(new ResourceLocation(MOD_ID, "mystcraft_tab"), () ->
             new ItemStack(MystcraftAges.DESCRIPTIVE_BOOK.get()));
-    
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(MOD_ID, Registry.ITEM_REGISTRY);
+
+    // Items
     public static final RegistrySupplier<Item> LINKING_BOOK = ITEMS.register("linking_book", () ->
             new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB)));
     public static final RegistrySupplier<Item> DESCRIPTIVE_BOOK = ITEMS.register("descriptive_book", () ->
