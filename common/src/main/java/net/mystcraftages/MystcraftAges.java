@@ -19,7 +19,7 @@ public class MystcraftAges {
     // Registries
     public static final Supplier<Registries> REGISTRIES = Suppliers.memoize(() -> Registries.get(MOD_ID));
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(MOD_ID, Registry.ITEM_REGISTRY);
-    
+
     // Creative Tabs
     public static final CreativeModeTab MYSTCRAFT_TAB = CreativeTabRegistry.create(new ResourceLocation(MOD_ID, "mystcraft_tab"), () ->
             new ItemStack(MystcraftAges.DESCRIPTIVE_BOOK.get()));
@@ -28,6 +28,8 @@ public class MystcraftAges {
     public static final RegistrySupplier<Item> LINKING_BOOK = ITEMS.register("linking_book", () ->
             new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB)));
     public static final RegistrySupplier<Item> DESCRIPTIVE_BOOK = ITEMS.register("descriptive_book", () ->
+            new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB)));
+    public static final RegistrySupplier<Item> INK_VIAL = ITEMS.register("ink_vial", () ->
             new Item(new Item.Properties().tab(MystcraftAges.MYSTCRAFT_TAB)));
     
     public static void init() {
