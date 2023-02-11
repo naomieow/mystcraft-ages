@@ -2,5 +2,8 @@
   "parent": "item/generated",
   "textures": {
     "layer0": "mystcraftages:item/linking_book_unlinked"
-  }
+  },
+  "overrides": [
+    { "predicate": {  "custom_model_data": 99976843 }, "model": "mystcraftages:item/linking_book_linked"}
+  ]
 }
