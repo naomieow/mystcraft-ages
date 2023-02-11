@@ -1,7 +1,6 @@
 package net.mystcraftages.items;
 
 import com.mojang.logging.LogUtils;
-import com.mojang.serialization.DataResult;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.GlobalPos;
 import net.minecraft.nbt.CompoundTag;
@@ -14,14 +13,10 @@ import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
-import net.mystcraftages.MystcraftAges;
 import org.slf4j.Logger;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.Optional;
 
 public class LinkingBookItem extends Item {
@@ -56,37 +51,31 @@ public class LinkingBookItem extends Item {
         return null;
     }
 
-    private void addLinkedTags(ResourceKey<Level> resourceKey, BlockPos blockPos, CompoundTag compoundTag) {
-        compoundTag.put("LinkedPos", NbtUtils.writeBlockPos(blockPos));
-//        DataResult dataResult = Level.RESOURCE_KEY_CODEC.encodeStart(NbtOps.INSTANCE, resourceKey);
-//        Logger logger = LOGGER;
-//        Objects.requireNonNull(logger);
-//        dataResult.resultOrPartial(logger::error).ifPresent((tag) ->
-//                compoundTag.put("LinkedDim", tag));
-    }
+    private void addLinkedTags(ItemStack itemStack, Player player, Level level) {
+        CompoundTag compoundTag = new CompoundTag();
+        ResourceKey<Level> resourceKey = level.dimension();
+        compoundTag.put("LinkedPos", NbtUtils.writeBlockPos(player.blockPosition()));
+        compoundTag.putString("LinkedDim", resourceKey.location().toString());
+        compoundTag.putInt("CustomModelData", 99976843);
+        itemStack.setTag(compoundTag);
 
+//        player.sendSystemMessage(Component.literal(player.blockPosition().toString()));
+//        player.sendSystemMessage(Component.literal(resourceKey.location().toString()));
+//        player.sendSystemMessage(Component.literal(
+//                itemStack.getOrCreateTag().getAsString()
+//        ));
+    }
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level.isClientSide() && hand == InteractionHand.MAIN_HAND) {
-            ItemStack itemStack = player.getUseItem();
-            player.sendSystemMessage(Component.literal("Used Linking Book!"));
-            player.getCooldowns().addCooldown(this, 50);
-            boolean bl = !player.getAbilities().instabuild && itemStack.getCount() == 1;
-            if (bl) {
-                this.addLinkedTags(level.dimension(), player.blockPosition(), itemStack.getOrCreateTag());
+            ItemStack itemStack = player.getItemInHand(hand);
+            if (isLinkedBook(itemStack)) {
+                player.sendSystemMessage(Component.literal("Teleport!"));
             } else {
-                ItemStack itemStack2 = new ItemStack(itemStack.getItem(), 1);
-                CompoundTag compoundTag = itemStack.hasTag() ? itemStack.getTag().copy() : new CompoundTag();
-                itemStack2.setTag(compoundTag);
-                if (!player.getAbilities().instabuild) {
-                    itemStack.shrink(1);
-                }
-
-                this.addLinkedTags(level.dimension(), player.blockPosition(), compoundTag);
-                if (!player.getInventory().add(itemStack2)) {
-                    player.drop(itemStack2, false);
-                }
+//                player.sendSystemMessage(Component.literal("Linked Book!"));
+                this.addLinkedTags(itemStack, player, level);
             }
+            player.getCooldowns().addCooldown(this, 50);
         }
         return super.use(level, player, hand);
     }
