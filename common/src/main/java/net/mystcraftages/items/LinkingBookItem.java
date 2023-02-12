@@ -20,7 +20,6 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class LinkingBookItem extends Item {
-    private static final Logger LOGGER = LogUtils.getLogger();
     public static final String TAG_LINK_POS = "LinkedPos";
     public static final String TAG_LINK_DIM = "LinkedDim";
 
@@ -58,12 +57,6 @@ public class LinkingBookItem extends Item {
         compoundTag.putString("LinkedDim", resourceKey.location().toString());
         compoundTag.putInt("CustomModelData", 99976843);
         itemStack.setTag(compoundTag);
-
-//        player.sendSystemMessage(Component.literal(player.blockPosition().toString()));
-//        player.sendSystemMessage(Component.literal(resourceKey.location().toString()));
-//        player.sendSystemMessage(Component.literal(
-//                itemStack.getOrCreateTag().getAsString()
-//        ));
     }
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
@@ -72,8 +65,13 @@ public class LinkingBookItem extends Item {
             if (isLinkedBook(itemStack)) {
                 player.sendSystemMessage(Component.literal("Teleport!"));
             } else {
-//                player.sendSystemMessage(Component.literal("Linked Book!"));
-                this.addLinkedTags(itemStack, player, level);
+                if (player.isCreative()) {
+                    ItemStack itemStack2 = itemStack.copy();
+                    this.addLinkedTags(itemStack2, player, level);
+                    player.addItem(itemStack2);
+                } else {
+                    this.addLinkedTags(itemStack, player, level);
+                }
             }
             player.getCooldowns().addCooldown(this, 50);
         }
