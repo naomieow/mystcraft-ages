@@ -55,10 +55,11 @@ public class LinkingBookItem extends Item {
         GlobalPos globalPos = getLinkedPosition(compoundTag);
         BlockPos blockPos = globalPos.pos();
         ResourceKey<Level> resourceKey = globalPos.dimension();
-        MinecraftServer minecraftServer = player.getLevel().getServer();
-        ServerLevel serverLevel2 = minecraftServer.getLevel(resourceKey);
-        player.changeDimension(serverLevel2);
-        player.setPos(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+//        MinecraftServer minecraftServer = player.getLevel().getServer();
+//        ServerLevel serverLevel2 = minecraftServer.getLevel(resourceKey);
+//        player.changeDimension(serverLevel2);
+//        player.setPos(blockPos.getX(), blockPos.getY(), blockPos.getZ());
+        player.moveTo(blockPos.getX(), blockPos.getY(), blockPos.getZ());
         player.resetFallDistance();
     }
 
