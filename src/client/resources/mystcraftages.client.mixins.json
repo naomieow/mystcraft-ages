@@ -3,7 +3,7 @@
 	"package": "net.mystcraftages.mixin.client",
 	"compatibilityLevel": "JAVA_17",
 	"client": [
-		"ExampleClientMixin"
+      "MystcraftAgesClientMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

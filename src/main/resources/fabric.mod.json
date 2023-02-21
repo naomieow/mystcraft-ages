@@ -16,13 +16,13 @@
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"net.mystcraftages.ExampleMod"
+          "net.mystcraftages.MystcraftAges"
 		],
 		"client": [
-			"net.mystcraftages.ExampleModClient"
+			"net.mystcraftages.MystcraftAgesClient"
 		],
 		"fabric-datagen": [
-			"net.mystcraftages.ExampleModDataGenerator"
+			"net.mystcraftages.MystcraftAgesDataGenerator"
 		]
 	},
 	"mixins": [
